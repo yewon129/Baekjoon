@@ -1,36 +1,32 @@
-from collections import deque
-
 N, M, V = map(int, input().split())
-graph = [[] for _ in range(N+1)]
-v = [0] * (N+1)
+lst = [[0] * (N+1) for _ in range(N+1)]
+
 for _ in range(M):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    lst[a][b] = b
+    lst[b][a] = a
 
-for i in range(len(graph)):
-    graph[i].sort()
+visited = [0] * (N+1)
+def dfs(v):
+    visited[v] = 1
+    print(v, end=' ')
+    for j in lst[v]:
+        if j != 0 and visited[j] == 0:
+            dfs(j)
 
-def dfs(s):
-    print(s, end=' ')
-    v[s] = 1
-    for i in graph[s]:
-        if v[i] == 0:
-            dfs(i)
-            v[i] = 1
-
-def bfs(s):
-    q=deque([s])
-    v[s] = 1
-    while q:
-        now = q.popleft()
-        print(now, end=' ')
-        for i in graph[now]:
-            if v[i] == 0:
-                q.append(i)
-                v[i] =1
+def bfs(v):
+    visited = [0] * (N + 1)
+    visited[v] = 1
+    print(v, end=' ')
+    queue = [v]
+    while queue:
+        k = queue.pop(0)
+        for k in lst[k]:
+            if k != 0 and visited[k] == 0:
+                visited[k] = 1
+                queue.append(k)
+                print(k, end=' ')
 
 dfs(V)
-v = [0] * (N+1)
 print()
 bfs(V)
