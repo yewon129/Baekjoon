@@ -2,11 +2,7 @@ def solution(p, c):
     answer = ''
     p.sort()
     c.sort()
-    for i in range(len(p)):
-        if i == len(p)-1:
-            answer = p[-1]
-            break
+    for i in range(len(c)):
         if p[i] != c[i]:
-            answer = p[i]
-            break
-    return answer
+            return p[i]
+    return p[-1]
