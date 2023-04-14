@@ -1,8 +1,8 @@
 def solution(numbers):
     answer = ''
-    numbers.sort(reverse=True, key=lambda x : str(x)*3)
+    numbers.sort(key=lambda x: str(x)*3, reverse=True)
     if numbers[0] == 0:
-        answer = "0"
-    else:
-        answer = "".join(str(i) for i in numbers)
+        return '0'
+    for num in numbers:
+        answer = answer + str(num)
     return answer
