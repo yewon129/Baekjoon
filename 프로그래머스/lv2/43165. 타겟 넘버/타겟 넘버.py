@@ -1,17 +1,15 @@
 def solution(numbers, target):
     answer = 0
-    
-    def dfs(i, arr, numbers, target):
+    def fn(i, n):
         nonlocal answer
-        if len(arr) != len(numbers):
-            dfs(i+1, arr+[numbers[i]] , numbers, target)
-            dfs(i+1, arr+[-numbers[i]], numbers, target)
-        if len(arr) == len(numbers):
-            if sum(arr) == target:
-                answer += 1
+        if i == len(numbers)-1 and n == target:
+            answer += 1
             return
+        if i == len(numbers)-1:
+            return
+        fn(i+1, n+numbers[i+1])
+        fn(i+1, n-numbers[i+1])
     
-    arr = []
-    dfs(0, arr, numbers, target)
-    
+    fn(0, numbers[0])
+    fn(0, -numbers[0])
     return answer
